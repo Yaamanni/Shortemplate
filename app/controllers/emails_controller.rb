@@ -5,4 +5,7 @@ class EmailsController < ApplicationController
   def show
     @email = Email.find(params[:id])
   end
+  def new
+    @email = Email.new
+  end
 end

@@ -1,0 +1,9 @@
+<%= form_with model: @email do |f| %>
+  <%= f.label :subject %>
+  <%= f.text_field :subject %>
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+  <%= f.label :tag %>
+  <%= f.text_field :tag %>
+  <%= f.submit %>
+<% end %>
