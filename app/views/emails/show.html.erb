@@ -2,7 +2,7 @@
 <p><%= @email.content %></p>
 <p><%= @email.tag %></p>
 
-<%= link_to "Delete",
+<%= link_to "Delete 🗑️",
   email_path(@email),
   data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
 %>
