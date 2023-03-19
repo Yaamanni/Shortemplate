@@ -1,0 +1,26 @@
+$gray: #F4F4F4; // Defining a variable
+$spacer: 8px;
+
+body {
+  background: $gray; // Using this variable
+}
+
+p {
+  padding: $spacer ($spacer * 3);
+}
+
+.banner {
+  background: red;
+
+  h1 {
+    font-size: 50px;
+  }
+}
+
+.banner {
+  background: red;
+}
+
+.banner h1 {
+  font-size: 50px;
+}
