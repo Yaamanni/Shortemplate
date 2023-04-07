@@ -36,12 +36,33 @@
   <div class="card-body">
     <blockquote class="blockquote mb-0">
       <p>“Don't resist the growing pains, push through them. ”</p>
-      <footer class="blockquote-footer">Germany Kent <cite title="Source Title">Source Title</cite></footer>
+      <footer class="blockquote-footer">Germany Kent </cite></footer>
     </blockquote>
   </div>
 </div>
 <br>
-  <% @emails.each do |email| %>
-    <li><h2> 👉 <%= link_to email.subject, email_path(email) %></h2></li>
+
+</ul>
+    <%= form_tag emails_path, method: :get do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search emails" %>
+  <%= submit_tag "Search", name: nil %>
+  <% if params[:search].present? %>
+    <%= link_to "Clear Search", emails_path %>
+  <% end %>
+<% end %>
+
+<% if params[:search].present? %>
+  <% emails = Email.where("subject LIKE :search OR content LIKE :search", search: "%#{params[:search]}%").order(created_at: :desc) %>
+<% else %>
+  <% emails = Email.all.order(created_at: :desc) %>
+<% end %>
+
+<ul>
+  <% if emails.present? %>
+    <% emails.each do |email| %>
+      <li><h2><%= link_to email.subject, email_path(email) %></h2></li>
+    <% end %>
+  <% else %>
+    <li>No emails found.</li>
   <% end %>
 </ul>
