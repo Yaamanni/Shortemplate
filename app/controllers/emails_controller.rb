@@ -27,6 +27,7 @@ class EmailsController < ApplicationController
     @email.destroy
     redirect_to emails_path, status: :see_other
   end
+
   private
   def email_params
     params.require(:email).permit(:subject, :content, :tag)
