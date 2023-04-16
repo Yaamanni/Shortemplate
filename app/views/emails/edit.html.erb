@@ -1,3 +1,43 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href=/emails>Shortemplate</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href=/emails/new> Upload</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="#">Favourites </a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+
+        <%= form_tag emails_path, method: :get do %>
+        <br>
+        <%= text_field_tag :search, params[:search], placeholder: "Search emails" %>
+        <%= submit_tag "Search", name: nil %>
+        <% if params[:search].present? %>
+        <br>
+        <%= link_to "Clear Search", emails_path %>
+      <% end %>
+    <% end %>
+
+    <% if params[:search].present? %>
+    <% emails = Email.where("subject LIKE :search OR content LIKE :search", search: "%#{params[:search]}%").order(created_at: :desc) %>
+    <% else %>
+    <% emails = Email.all.order(created_at: :desc) %>
+    <% end %>
+    </form>
+    </div>
+  </div>
+</nav>
+
 <%= form_with model: @email do |f| %>
  <%= f.label :subject %>
   <%= f.text_field :subject %>
