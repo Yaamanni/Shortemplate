@@ -41,12 +41,20 @@
 
 <H1> All EMAILS 🧠</H1>
 
-<ul>
-  <% if emails.present? %>
-    <% emails.each do |email| %>
-      <li><h2><%= link_to email.subject, email_path(email) %></h2></li>
-    <% end %>
-  <% else %>
-    <li>No emails found.</li>
-  <% end %>
-</ul>
+
+
+<% if emails.present? %>
+<% emails.each do |email| %>
+<div class="card">
+<h5 class="card-header">Email</h5>
+<div class="card-body">
+<h5 class="card-title"><%= link_to email.subject, email_path(email) %></h5>
+<p class="card-text"><%= link_to email.content, email_path(email) %></p>
+<a href="/emails/[:id]" class="btn btn-primary">Read more</a>
+</div>
+</div>
+<% end %>
+<% else %>
+
+  <p>No emails found.</p>
+<% end %>
