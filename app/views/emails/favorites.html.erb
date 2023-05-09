@@ -18,40 +18,4 @@
         </li>
       </ul>
       <form class="d-flex" role="search">
-
-        <%= form_tag emails_path, method: :get do %>
-        <br>
-        <%= text_field_tag :search, params[:search], placeholder: "Search emails" %>
-        <%= submit_tag "Search", name: nil %>
-        <% if params[:search].present? %>
-        <br>
-        <%= link_to "Clear Search", emails_path %>
-      <% end %>
-    <% end %>
-     <% if params[:search].present? %>
-    <% emails = Email.where("subject LIKE :search OR content LIKE :search", search: "%#{params[:search]}%").order(created_at: :desc) %>
-    <% else %>
-    <% emails = Email.all.order(created_at: :desc) %>
-    <% end %>
-    </form>
-    </div>
-  </div>
-</nav>
-
-<H1>Upload your emails ✍️</H1>
-<%= form_with model: @email do |f| %>
-  <%= f.label :subject %>
-  <%= f.text_field :subject %>
-  <br>
-  <br>
-  <%= f.label :content %>
-  <%= f.text_field :content %>
-  <br>
-  <br>
-  <%= f.label :tag %>
-  <%= f.text_field :tag %>
-  <br>
-  <br>
-  <%= f.submit %>
-<% end %>
 </div>

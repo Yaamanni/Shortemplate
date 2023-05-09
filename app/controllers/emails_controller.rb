@@ -27,9 +27,19 @@ class EmailsController < ApplicationController
     @email.destroy
     redirect_to emails_path, status: :see_other
   end
-
-  private
-  def email_params
-    params.require(:email).permit(:subject, :content, :tag)
+  def update
+    @email = Email.find(params[:id])
+    if params[:email][:favorite]
+      email.favorite = params[:email][:favorite]
+    end
+    def favorite
+      @email = Email.find(params[:id])
+      if params[:favorite] == "true"
+        email.update_attribute(:favorite, true)
+      else
+        email.update_attribute(:favorite, false)
+      end
+      redirect_to root_path
+    end
   end
 end
